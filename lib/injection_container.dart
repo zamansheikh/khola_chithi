@@ -7,6 +7,7 @@ import 'package:khola_chithi/features/auth/domain/repositories/auth_repository.d
 import 'package:khola_chithi/features/auth/domain/usecases/check_auth_status.dart';
 import 'package:khola_chithi/features/auth/domain/usecases/sign_in.dart';
 import 'package:khola_chithi/features/auth/domain/usecases/sign_out.dart';
+import 'package:khola_chithi/features/auth/domain/usecases/sign_up.dart';
 import 'package:khola_chithi/features/auth/presentation/providers/app_auth_provider.dart';
 import 'package:khola_chithi/features/post/data/repositories/post_repository_impl.dart';
 import 'package:khola_chithi/features/post/domain/repositories/post_repository.dart';
@@ -36,6 +37,7 @@ void init() {
   sl.registerLazySingleton(() => SignIn(sl()));
   sl.registerLazySingleton(() => SignOut(sl()));
   sl.registerLazySingleton(() => CheckAuthStatus(sl()));
+  sl.registerLazySingleton(() => SignUp(sl()));
 
   // Post Use cases
   sl.registerLazySingleton(() => AddPost(sl()));

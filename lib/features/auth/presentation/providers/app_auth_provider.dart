@@ -36,11 +36,16 @@ class AppAuthProvider with ChangeNotifier {
 
   Future<void> checkAuthStatus() async {
     _user = await checkAuthStatusUseCase();
-    isLoggedIn = _user !=null;
+    isLoggedIn = _user != null;
     notifyListeners();
   }
+
   Future<void> signUp(String email, String password, String userName) async {
     _user = await signUpUseCase(email, password, userName);
+
+    // Optionally, update isLoggedIn:
+    isLoggedIn = _user != null;
+
     notifyListeners();
   }
 }

@@ -3,12 +3,13 @@ import 'package:khola_chithi/features/auth/domain/entities/user.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
 
 class UserModel extends User {
-  UserModel({required super.id, required super.email});
+  UserModel({required super.id, required super.email, required super.userName});
 
   factory UserModel.fromFirebase(firebase.User firebaseUser) {
     return UserModel(
       id: firebaseUser.uid,
       email: firebaseUser.email!,
+      userName: firebaseUser.displayName!,
     );
   }
 }
