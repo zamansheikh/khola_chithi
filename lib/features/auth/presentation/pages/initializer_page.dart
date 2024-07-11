@@ -14,7 +14,7 @@ class InitializerPage extends StatelessWidget {
       builder: (context, value, _) {
         value.checkAuthStatus();
         if (value.isLoggedIn) {
-          return  PostsPage();
+          return const PostsPage();
         } else {
           return const LogInPage();
         }

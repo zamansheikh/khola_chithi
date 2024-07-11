@@ -16,7 +16,7 @@ class AuthRepositoryImpl implements AuthRepository {
           email: email, password: password);
       return UserModel.fromFirebase(result.user!);
     } catch (e) {
-      print(e.toString());
+      // print(e.toString());
     }
     return null;
   }
