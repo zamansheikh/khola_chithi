@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:khola_chithi/features/auth/presentation/pages/login_page.dart';
 import 'package:khola_chithi/features/auth/presentation/pages/initializer_page.dart';
 import 'package:khola_chithi/features/post/presentation/providers/post_provider.dart';
+import 'package:khola_chithi/features/auth/presentation/pages/signup.dart';
 import 'package:khola_chithi/firebase_options.dart';
 import 'package:khola_chithi/theme/dark_mode.dart';
 import 'package:khola_chithi/theme/light_mode.dart';
@@ -46,7 +47,8 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (context) => const InitializerPage(),
           '/posts': (context) => const PostsPage(),
-          '/login': (context) => const LogInPage(),
+          '/login': (context) => const LoginPage(),
+          '/signup': (context) => const Signup(),
         },
       ),
     );

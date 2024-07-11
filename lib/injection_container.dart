@@ -49,6 +49,7 @@ void init() {
         signInUseCase: sl(),
         signOutUseCase: sl(),
         checkAuthStatusUseCase: sl(),
+        signUpUseCase: sl(),
       ));
   sl.registerFactory(() => PostProvider(
         addPostUseCase: sl(),

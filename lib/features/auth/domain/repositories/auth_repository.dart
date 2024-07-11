@@ -6,4 +6,5 @@ abstract class AuthRepository {
   Future<void> signOut();
   Future<User?> getCurrentUser();
   Future<User?> checkAuthStatus();
+  Future<User?> signUp(String email, String password, String userName);
 }

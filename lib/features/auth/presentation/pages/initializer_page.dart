@@ -16,7 +16,7 @@ class InitializerPage extends StatelessWidget {
         if (value.isLoggedIn) {
           return const PostsPage();
         } else {
-          return const LogInPage();
+          return const LoginPage();
         }
       },
     );

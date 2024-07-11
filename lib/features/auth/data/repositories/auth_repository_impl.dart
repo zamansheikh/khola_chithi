@@ -43,4 +43,20 @@ class AuthRepositoryImpl implements AuthRepository {
       return null;
     }
   }
+  
+  @override
+  Future<User?> signUp(String email, String password, String userName) async {
+    try {
+      final result = await firebaseAuth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      await result.user!.updateDisplayName(userName);
+      return UserModel.fromFirebase(result.user!);
+    } catch (e) {
+      // print(e.toString());
+    }
+    return null;
+
+   
+  }
+  
 }

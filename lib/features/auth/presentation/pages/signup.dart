@@ -1,25 +1,24 @@
-
 import 'package:flutter/material.dart';
+import 'package:khola_chithi/features/auth/presentation/providers/app_auth_provider.dart';
 import 'package:khola_chithi/widgets/my_button.dart';
 import 'package:khola_chithi/widgets/my_textfield.dart';
-import 'package:khola_chithi/x_old/auth_controller.dart';
 import 'package:provider/provider.dart';
 
-//create password controller and email controller in my class
-
 class Signup extends StatefulWidget {
-  final void Function()? toggle;
-  const Signup({super.key, required this.toggle});
+  const Signup({super.key});
 
   @override
   State<Signup> createState() => _SignupState();
 }
 
 class _SignupState extends State<Signup> {
-
+  final _userNameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Consumer<AuthController>(
+    return Consumer<AppAuthProvider>(
       builder: (context, values, child) => Scaffold(
         backgroundColor: Theme.of(context).colorScheme.surface,
         body: SingleChildScrollView(
@@ -51,7 +50,7 @@ class _SignupState extends State<Signup> {
                     MyTextfield(
                       hintText: "User Name",
                       obscureText: false,
-                      controller: values.userNameController,
+                      controller: _userNameController,
                     ),
                     const SizedBox(
                       height: 10,
@@ -61,7 +60,7 @@ class _SignupState extends State<Signup> {
                     MyTextfield(
                       hintText: "Email",
                       obscureText: false,
-                      controller: values.emailController,
+                      controller: _emailController,
                     ),
                     const SizedBox(
                       height: 10,
@@ -69,7 +68,7 @@ class _SignupState extends State<Signup> {
                     MyTextfield(
                       hintText: "Password",
                       obscureText: true,
-                      controller: values.passwordController,
+                      controller: _passwordController,
                     ),
 
                     const SizedBox(
@@ -79,7 +78,7 @@ class _SignupState extends State<Signup> {
                     MyTextfield(
                       hintText: "Confirm Password",
                       obscureText: true,
-                      controller: values.confirmPasswordController,
+                      controller: _confirmPasswordController,
                     ),
 
                     const SizedBox(
@@ -104,14 +103,14 @@ class _SignupState extends State<Signup> {
                     ),
 
                     //Signup button
-                    MyButton(
+                    const MyButton(
                       text: "SignUp",
-                      onTap: ()=>values.signUp(context),
+                      // onTap: () => values.s
                     ),
 
                     const SizedBox(height: 10),
                     GestureDetector(
-                      onTap: widget.toggle,
+                      // onTap: widget.toggle,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
