@@ -159,21 +159,12 @@ class _PostsPageState extends State<PostsPage> {
                         Row(
                           children: [
                             IconButton(
-                              onPressed: () {},
-                              icon: (true)
-                                  ? Icon(
-                                      Icons.favorite,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary,
-                                    )
-                                  : Icon(
-                                      Icons.favorite_border,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary,
-                                    ),
-                            ),
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.favorite,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                )),
 
                             // Expanded(child: child)
                             Text(
