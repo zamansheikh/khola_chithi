@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "628859749697",
+    "project_id": "kholachithi-e3023",
+    "storage_bucket": "kholachithi-e3023.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:628859749697:android:73ad6aed9e45721ca60dc0",
+        "android_client_info": {
+          "package_name": "com.decodersfamily.khola_chithi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCivpHXZ1zzSbt8MLKH3yy5KfYXPcKWSWc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
