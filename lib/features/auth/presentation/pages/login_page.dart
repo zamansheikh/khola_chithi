@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:khola_chithi/core/utils/helper_function.dart';
 import 'package:khola_chithi/features/auth/presentation/providers/app_auth_provider.dart';
 import 'package:khola_chithi/widgets/my_button.dart';
 import 'package:khola_chithi/widgets/my_textfield.dart';
@@ -81,8 +82,16 @@ class _LoginPageState extends State<LoginPage> {
                     //login button
                     MyButton(
                       text: "Login",
-                      onTap: () => values.signIn(
-                          _emailController.text, _passwordController.text),
+                      onTap: () {
+                        if (_emailController.text.isNotEmpty &&
+                            _passwordController.text.isNotEmpty) {
+                          values.signIn(
+                              _emailController.text, _passwordController.text);
+                        } else {
+                          displaySnackBar(
+                              context, "Please fill all the fields");
+                        }
+                      },
                     ),
 
                     const SizedBox(height: 10),
