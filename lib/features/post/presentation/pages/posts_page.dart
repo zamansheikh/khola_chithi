@@ -5,6 +5,7 @@ import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:khola_chithi/core/utils/helper_function.dart';
 import 'package:khola_chithi/features/auth/presentation/providers/app_auth_provider.dart';
+import 'package:khola_chithi/features/post/data/models/post_model.dart';
 import 'package:khola_chithi/widgets/message_field.dart';
 import 'package:provider/provider.dart';
 import 'package:khola_chithi/features/post/domain/entities/post.dart';
@@ -28,6 +29,7 @@ class _PostsPageState extends State<PostsPage> {
   @override
   void initState() {
     super.initState();
+    context.read<PostProvider>().fetchPosts();
 
     // final authController = Provider.of<AuthController>(context, listen: false);
     // authController.getLastPost();
@@ -243,7 +245,7 @@ class _PostsPageState extends State<PostsPage> {
                 actions: [
                   ElevatedButton(
                     onPressed: () {
-                      Post post = Post(
+                      final post = PostModel(
                         id: context.read<AppAuthProvider>().user!.id,
                         userId: context.read<AppAuthProvider>().user!.id,
                         toTheUser: _whomController.text,
