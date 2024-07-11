@@ -110,7 +110,9 @@ class _SignupState extends State<Signup> {
 
                     const SizedBox(height: 10),
                     GestureDetector(
-                      // onTap: widget.toggle,
+                      onTap: () {
+                        Navigator.pushReplacementNamed(context, "/login");
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

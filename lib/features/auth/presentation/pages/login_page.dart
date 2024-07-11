@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:khola_chithi/features/auth/presentation/providers/app_auth_provider.dart';
 import 'package:khola_chithi/widgets/my_button.dart';
@@ -82,12 +81,15 @@ class _LoginPageState extends State<LoginPage> {
                     //login button
                     MyButton(
                       text: "Login",
-                      onTap: () => values.signIn(_emailController.text, _passwordController.text),
+                      onTap: () => values.signIn(
+                          _emailController.text, _passwordController.text),
                     ),
 
                     const SizedBox(height: 10),
                     GestureDetector(
-                      // onTap: widget.toggle,
+                      onTap: () {
+                        Navigator.pushReplacementNamed(context, "/signup");
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
