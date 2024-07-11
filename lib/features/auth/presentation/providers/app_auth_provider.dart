@@ -15,6 +15,7 @@ class AppAuthProvider with ChangeNotifier {
   User? _user;
   User? get user => _user;
   bool isLoggedIn = false;
+  bool isLoading = false;
 
   AppAuthProvider({
     required this.signInUseCase,
@@ -41,10 +42,14 @@ class AppAuthProvider with ChangeNotifier {
   }
 
   Future<void> signUp(String email, String password, String userName) async {
+    isLoading = true;
+    notifyListeners();
     _user = await signUpUseCase(email, password, userName);
+    print(_user!.email);
 
     // Optionally, update isLoggedIn:
     isLoggedIn = _user != null;
+    isLoading = false;
 
     notifyListeners();
   }

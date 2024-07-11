@@ -6,7 +6,6 @@ import 'package:khola_chithi/features/auth/presentation/providers/app_auth_provi
 
 class InitializerPage extends StatelessWidget {
   const InitializerPage({super.key});
-  
 
   @override
   Widget build(BuildContext context) {

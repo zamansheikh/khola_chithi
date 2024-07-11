@@ -124,6 +124,14 @@ class _SignupState extends State<Signup> {
                         }
                       },
                     ),
+                    Visibility(
+                      visible: values.isLoading,
+                      child: const SizedBox(
+                        height: 30,
+                        width: double.infinity,
+                        child: Center(child: CircularProgressIndicator()),
+                      ),
+                    ),
 
                     const SizedBox(height: 10),
                     GestureDetector(
