@@ -162,12 +162,15 @@ class _PostsPageState extends State<PostsPage> {
                         Row(
                           children: [
                             IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.favorite,
-                                  color:
-                                      Theme.of(context).colorScheme.secondary,
-                                )),
+                              onPressed: () {
+                                value.reactToPost(post.id,
+                                    context.read<AppAuthProvider>().user!.id);
+                              },
+                              icon: (post.readBy.contains(
+                                      context.read<AppAuthProvider>().user!.id))
+                                  ? const Icon(Icons.favorite)
+                                  : const Icon(Icons.favorite_border),
+                            ),
 
                             // Expanded(child: child)
                             Text(
@@ -177,12 +180,15 @@ class _PostsPageState extends State<PostsPage> {
                               ),
                             ),
                             const Spacer(),
-                            // Text(
-                            //   "এডিট : ${values.formatTimestamp(post.updatedAt)}",
-                            //   style: const TextStyle(
-                            //     fontSize: 12,
-                            //   ),
-                            // ),
+                            Visibility(
+                              visible: (post.editedAt != null),
+                              child: Text(
+                                "এডিট : ${formatTimestamp(post.editedAt ?? post.createdAt)}",
+                                style: const TextStyle(
+                                  fontSize: 8,
+                                ),
+                              ),
+                            ),
                             Visibility(
                               visible: (post.userId ==
                                   context.read<AppAuthProvider>().user!.id),

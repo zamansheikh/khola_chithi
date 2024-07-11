@@ -31,7 +31,9 @@ class PostRepositoryImpl implements PostRepository {
   Future<List<Post>> getPosts() async {
     final querySnapshot = await firestore.collection('posts').get();
     return querySnapshot.docs
-        .map((doc) => PostModel.fromFirebase(doc.data(),))
+        .map((doc) => PostModel.fromFirebase(
+              doc.data(),
+            ))
         .toList();
   }
 
@@ -61,10 +63,14 @@ class PostRepositoryImpl implements PostRepository {
     await firestore.runTransaction((transaction) async {
       final snapshot = await transaction.get(postRef);
       if (snapshot.exists) {
-        final postModel = PostModel.fromFirebase(
-            snapshot.data() as Map<String, dynamic>);
+        final postModel =
+            PostModel.fromFirebase(snapshot.data() as Map<String, dynamic>);
         if (!postModel.readBy.contains(userId)) {
           postModel.readBy.add(userId);
+          transaction.update(postRef, {'readBy': postModel.readBy});
+        }
+        else {
+          postModel.readBy.remove(userId);
           transaction.update(postRef, {'readBy': postModel.readBy});
         }
       }

@@ -60,6 +60,10 @@ class PostProvider with ChangeNotifier {
         post.readBy.add(userId);
         _posts[index] = post;
         notifyListeners();
+      } else {
+        post.readBy.remove(userId);
+        _posts[index] = post;
+        notifyListeners();
       }
     }
   }
