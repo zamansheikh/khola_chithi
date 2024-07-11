@@ -12,9 +12,9 @@ class PostModel extends Post {
     required super.readBy,
   });
 
-  factory PostModel.fromFirebase(Map<String, dynamic> data, String documentId) {
+  factory PostModel.fromFirebase(Map<String, dynamic> data) {
     return PostModel(
-      id: documentId,
+      id: "postId",
       userId: data['userId'],
       toTheUser: data['toTheUser'],
       message: data['message'],
@@ -28,6 +28,7 @@ class PostModel extends Post {
 
   Map<String, dynamic> toMap() {
     return {
+      'postId': id,
       'userId': userId,
       'toTheUser': toTheUser,
       'message': message,

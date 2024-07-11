@@ -10,6 +10,7 @@ import 'package:khola_chithi/widgets/message_field.dart';
 import 'package:provider/provider.dart';
 import 'package:khola_chithi/features/post/domain/entities/post.dart';
 import 'package:khola_chithi/features/post/presentation/providers/post_provider.dart';
+import 'package:random_x/random_x.dart';
 
 class PostsPage extends StatefulWidget {
   const PostsPage({super.key});
@@ -183,13 +184,13 @@ class _PostsPageState extends State<PostsPage> {
                             //   ),
                             // ),
                             Visibility(
-                              visible: true,
+                              visible: (post.userId ==
+                                  context.read<AppAuthProvider>().user!.id),
                               child: IconButton(
                                 onPressed: () {
                                   _showDialogWindow(
                                     context,
                                     post,
-                                    "User ID passesd",
                                   );
                                 },
                                 icon: const Icon(Icons.edit),
@@ -197,10 +198,11 @@ class _PostsPageState extends State<PostsPage> {
                             ),
 
                             Visibility(
-                              visible: true,
+                              visible: (post.userId ==
+                                  context.read<AppAuthProvider>().user!.id),
                               child: IconButton(
                                 onPressed: () {
-                                  value.deletePost("postID");
+                                  value.deletePost(post.id);
                                 },
                                 icon: const Icon(Icons.delete),
                               ),
@@ -246,7 +248,7 @@ class _PostsPageState extends State<PostsPage> {
                   ElevatedButton(
                     onPressed: () {
                       final post = PostModel(
-                        id: context.read<AppAuthProvider>().user!.id,
+                        id: RndX.genUUID(),
                         userId: context.read<AppAuthProvider>().user!.id,
                         toTheUser: _whomController.text,
                         message: _messageController.text,
@@ -273,7 +275,7 @@ class _PostsPageState extends State<PostsPage> {
         child: const Icon(Icons.add),
       );
 
-  void _showDialogWindow(BuildContext context, Post post, String id) {
+  void _showDialogWindow(BuildContext context, Post post) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -295,7 +297,21 @@ class _PostsPageState extends State<PostsPage> {
           ),
           actions: [
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                final updatedPost = PostModel(
+                  id: post.id,
+                  userId: post.userId,
+                  toTheUser: _whomController.text,
+                  message: _messageController.text,
+                  createdAt: post.createdAt,
+                  editedAt: Timestamp.now(),
+                  readBy: post.readBy,
+                );
+                context.read<PostProvider>().editPost(updatedPost);
+                Navigator.of(context).pop();
+                _whomController.clear();
+                _messageController.clear();
+              },
               child: Text(
                 "পরির্তিত চিঠি পোস্ট করুন",
                 style: TextStyle(

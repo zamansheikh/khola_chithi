@@ -21,14 +21,17 @@ class PostRepositoryImpl implements PostRepository {
       readBy: post.readBy,
     );
 
-    await firestore.collection('posts').add(postModel.toMap());
+    await firestore
+        .collection('posts')
+        .doc(postModel.id)
+        .set(postModel.toMap());
   }
 
   @override
   Future<List<Post>> getPosts() async {
     final querySnapshot = await firestore.collection('posts').get();
     return querySnapshot.docs
-        .map((doc) => PostModel.fromFirebase(doc.data(), doc.id))
+        .map((doc) => PostModel.fromFirebase(doc.data(),))
         .toList();
   }
 
@@ -58,7 +61,8 @@ class PostRepositoryImpl implements PostRepository {
     await firestore.runTransaction((transaction) async {
       final snapshot = await transaction.get(postRef);
       if (snapshot.exists) {
-        final postModel = PostModel.fromFirebase(snapshot.data() as Map<String, dynamic>, snapshot.id);
+        final postModel = PostModel.fromFirebase(
+            snapshot.data() as Map<String, dynamic>);
         if (!postModel.readBy.contains(userId)) {
           postModel.readBy.add(userId);
           transaction.update(postRef, {'readBy': postModel.readBy});
