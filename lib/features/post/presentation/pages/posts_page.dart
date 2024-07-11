@@ -168,8 +168,8 @@ class _PostsPageState extends State<PostsPage> {
                               },
                               icon: (post.readBy.contains(
                                       context.read<AppAuthProvider>().user!.id))
-                                  ? const Icon(Icons.favorite)
-                                  : const Icon(Icons.favorite_border),
+                                  ? const Icon(Icons.mark_chat_read_rounded)
+                                  : const Icon(Icons.mark_chat_unread_rounded),
                             ),
 
                             // Expanded(child: child)
