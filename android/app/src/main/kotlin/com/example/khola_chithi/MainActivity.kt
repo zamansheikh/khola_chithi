@@ -1,4 +1,4 @@
-package com.decodersfamily.khola_chithi
+package com.example.khola_chithi
 
 import io.flutter.embedding.android.FlutterActivity
 
