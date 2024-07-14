@@ -5,7 +5,6 @@ import 'package:khola_chithi/features/auth/domain/usecases/check_auth_status.dar
 import 'package:khola_chithi/features/auth/domain/usecases/sign_in.dart';
 import 'package:khola_chithi/features/auth/domain/usecases/sign_out.dart';
 import 'package:khola_chithi/features/auth/domain/usecases/sign_up.dart';
-import 'package:khola_chithi/features/post/presentation/pages/posts_page.dart';
 
 class AppAuthProvider with ChangeNotifier {
   final SignIn signInUseCase;
@@ -32,6 +31,15 @@ class AppAuthProvider with ChangeNotifier {
     isLoading = false;
     notifyListeners();
   }
+  Future<void> signUp(String email, String password, String userName) async {
+    isLoading = true;
+    notifyListeners();
+    _user = await signUpUseCase(email, password, userName);
+    isLoggedIn = _user != null;
+    isLoading = false;
+
+    notifyListeners();
+  }
 
   Future<void> signOut() async {
     await signOutUseCase();
@@ -45,13 +53,5 @@ class AppAuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> signUp(String email, String password, String userName) async {
-    isLoading = true;
-    notifyListeners();
-    _user = await signUpUseCase(email, password, userName);
-    isLoggedIn = _user != null;
-    isLoading = false;
-
-    notifyListeners();
-  }
+  
 }
