@@ -104,32 +104,36 @@ class _SignupState extends State<Signup> {
                     ),
 
                     //Signup button
-                    MyButton(
-                      text: "SignUp",
-                      onTap: () {
-                        if (_passwordController.text ==
-                            _confirmPasswordController.text) {
-                          if (_userNameController.text.isNotEmpty &&
-                              _emailController.text.isNotEmpty &&
-                              _passwordController.text.isNotEmpty) {
-                            values.signUp(
-                                _emailController.text,
-                                _passwordController.text,
-                                _userNameController.text);
-                          } else {
-                            displaySnackBar(context, "Please fill all fields");
-                          }
-                        } else {
-                          displaySnackBar(context, "Password does not match");
-                        }
-                      },
-                    ),
                     Visibility(
-                      visible: values.isLoading,
-                      child: const SizedBox(
-                        height: 30,
-                        width: double.infinity,
-                        child: Center(child: CircularProgressIndicator()),
+                      visible: !context.watch<AppAuthProvider>().isLoading,
+                      replacement: const CircularProgressIndicator(),
+                      child: MyButton(
+                        text: "SignUp",
+                        onTap: () {
+                          if (_passwordController.text ==
+                              _confirmPasswordController.text) {
+                            if (_userNameController.text.isNotEmpty &&
+                                _emailController.text.isNotEmpty &&
+                                _passwordController.text.isNotEmpty) {
+                              values.signUp(
+                                  _emailController.text,
+                                  _passwordController.text,
+                                  _userNameController.text);
+                              Provider.of<AppAuthProvider>(context,
+                                          listen: false)
+                                      .isLoggedIn
+                                  ? Navigator.pushReplacementNamed(
+                                      context, "/posts")
+                                  : displaySnackBar(
+                                      context, "Something went wrong");
+                            } else {
+                              displaySnackBar(
+                                  context, "Please fill all fields");
+                            }
+                          } else {
+                            displaySnackBar(context, "Password does not match");
+                          }
+                        },
                       ),
                     ),
 

@@ -80,18 +80,22 @@ class _LoginPageState extends State<LoginPage> {
 
                     const SizedBox(height: 10),
                     //login button
-                    MyButton(
-                      text: "Login",
-                      onTap: () {
-                        if (_emailController.text.isNotEmpty &&
-                            _passwordController.text.isNotEmpty) {
-                          values.signIn(
-                              _emailController.text, _passwordController.text);
-                        } else {
-                          displaySnackBar(
-                              context, "Please fill all the fields");
-                        }
-                      },
+                    Visibility(
+                      visible: !context.watch<AppAuthProvider>().isLoading,
+                      replacement: const CircularProgressIndicator(),
+                      child: MyButton(
+                        text: "Login",
+                        onTap: () {
+                          if (_emailController.text.isNotEmpty &&
+                              _passwordController.text.isNotEmpty) {
+                            values.signIn(_emailController.text,
+                                _passwordController.text);
+                          } else {
+                            displaySnackBar(
+                                context, "Please fill all the fields");
+                          }
+                        },
+                      ),
                     ),
 
                     const SizedBox(height: 10),

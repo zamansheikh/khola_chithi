@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:khola_chithi/features/auth/presentation/pages/login_page.dart';
+import 'package:khola_chithi/features/auth/presentation/providers/app_auth_provider.dart';
 import 'package:khola_chithi/features/post/presentation/pages/posts_page.dart';
 import 'package:provider/provider.dart';
 
@@ -9,6 +10,7 @@ class InitializerPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AppAuthProvider>(context, listen: false);
     return StreamBuilder(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
@@ -23,7 +25,7 @@ class InitializerPage extends StatelessWidget {
           );
         }
         if (snapshot.hasData) {
-          Provider.of(context, listen: false).checkAuthStatus();
+          authProvider.checkAuthStatus();
           return const PostsPage();
         }
         return const LoginPage();
