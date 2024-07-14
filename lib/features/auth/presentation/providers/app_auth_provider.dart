@@ -24,14 +24,15 @@ class AppAuthProvider with ChangeNotifier {
     required this.signUpUseCase,
   });
 
-  Future<void> signIn(String email, String password) async {
+  void signIn(String email, String password) async {
     isLoading = true;
     notifyListeners();
     _user = await signInUseCase(email, password);
     isLoading = false;
     notifyListeners();
   }
-  Future<void> signUp(String email, String password, String userName) async {
+
+  void signUp(String email, String password, String userName) async {
     isLoading = true;
     notifyListeners();
     _user = await signUpUseCase(email, password, userName);
@@ -41,17 +42,15 @@ class AppAuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> signOut() async {
+  void signOut() async {
     await signOutUseCase();
     _user = null;
     notifyListeners();
   }
 
-  Future<void> checkAuthStatus() async {
+  void checkAuthStatus() async {
     _user = await checkAuthStatusUseCase();
     isLoggedIn = _user != null;
     notifyListeners();
   }
-
-  
 }

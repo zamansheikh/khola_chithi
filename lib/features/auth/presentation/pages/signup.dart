@@ -109,19 +109,20 @@ class _SignupState extends State<Signup> {
                       replacement: const CircularProgressIndicator(),
                       child: MyButton(
                         text: "SignUp",
-                        onTap: () async {
+                        onTap: () {
                           if (_passwordController.text ==
                               _confirmPasswordController.text) {
                             if (_userNameController.text.isNotEmpty &&
                                 _emailController.text.isNotEmpty &&
                                 _passwordController.text.isNotEmpty) {
-                              await values.signUp(
+                              values.signUp(
                                   _emailController.text,
                                   _passwordController.text,
                                   _userNameController.text);
                               displayMessage(context, "Sign up successful");
-                              await Future.delayed(Duration(seconds: 2));
-                              Navigator.pushReplacementNamed(context, "/login");
+                              Future.delayed(const Duration(seconds: 2)).then(
+                                  (value) => Navigator.pushReplacementNamed(
+                                      context, "/login"));
                             } else {
                               displaySnackBar(
                                   context, "Please fill all fields");
